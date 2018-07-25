@@ -1,14 +1,19 @@
 <?php
 
-//print_r(json_decode(file_get_contents('php://input')));
-const VERIFY_TOKEN = "dik"; //but it can be anything, this should be application generated and generated only once
+/**
+ * fb-bot
+ * 
+ * A simplistic yet functional prototype of automated responses for Facebook pages.
+ * Made purely for practice and tinkering purposes, shouldn't be used on a public page.
+ */
+const VERIFY_TOKEN = "a_unique_token"; //but it can be anything, this should be application generated and generated only once
 const ACCESS_TOKEN = "EAAYaPZB8xkmEBAIYTZBZCsAwaMWUrMc6xIj2Hp68r9VLNn1uTbwbeZBZCO4Oh3KEq7ps1UZChXSjxGUbXmr9njdyjUXxoTxWnXjm4SMb3e5VjQOSW8VQPIcfBjZCClaIwMEcQgr0FhYym2SHC4JZCqcZCm2LcrRFOZBBOCeWz1kzZAGa6ZA7qZBueqZBCL";
 
 
 /**
  * Authenticate with the facebook application.
  *
- * Sends a response with 
+ * 
  */
 function authenticate($request) {
 	if($request["hub_verify_token"] === VERIFY_TOKEN) {
@@ -28,14 +33,14 @@ function authenticate($request) {
 }
 
 /**
- * Initializes greeting message, persistent menu and so forth
+ * Initializes greeting message, persistent menu, and so forth.
  */
 function initialize() {
 
 }
 
 /**
- * Constructs a reply message and sends it.
+ * Constructs a reply message.
  *
  * Will have a type attached to it for more control over the type of messages sent(text, url, cta, etc.)
  */
@@ -120,6 +125,7 @@ function handle($request, $postback = false) {
 	sendMessage($response);
 }
 
+// First connect
 if(isset($_GET["hub_verify_token"])) {
 	echo authenticate($_GET);
 	exit;
